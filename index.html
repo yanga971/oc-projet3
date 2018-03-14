@@ -2,14 +2,39 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Réservation de vélos sur Lyon</title>
 
   </head>
 
   <body>
+    <header>
+      <div id="slideshow">
+        <div id="photo1">
+          <img  src=" " alt=" " class="photo">
+          <p><!--Description/explications de l'application--></p>
+        </div>
+      </div>
+    </header>
 
+    <section>
+      <div id="google_map">
+      </div>
 
+      <div id="station_detail">
+        <h2>Détails de la station</h2>
+        <button type="button">Réservez</button>
+      </div>
+    </section>
+
+    <footer>
+
+    </footer>
+
+    <script src="ajax.js"></script>
     <script src="main.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO_u15K0DyqTxo95F7W-D42ZNSUzorIs4&callback=initMap"></script>
+
   </body>
 </html>
