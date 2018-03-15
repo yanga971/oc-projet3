@@ -1,5 +1,6 @@
 // Exécute un appel AJAX GET
 // Prend en paramètres l'URL cible et la fonction callback appelée en cas de succès
+//Gestion des erreurs
 function ajaxGet(url, callback) {
     var req = new XMLHttpRequest();
     req.open("GET", url);
