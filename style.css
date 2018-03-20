@@ -7,11 +7,3 @@ section {
   display: flex;
   justify-content: space-around;
 }
-/* Informations dans l'encart "détails de la station"*/
-h3 {
-  font-size: 1em;
-}
-
-p {
-  font-size: 0.6em;
-}
