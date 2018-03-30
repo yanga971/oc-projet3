@@ -19,8 +19,7 @@
     </header>
 
     <section>
-      <div id="google_map">
-      </div>
+      <div id="google_map"></div>
 
       <div id="detailsStation">
         <h2>Détails de la station</h2>
@@ -29,17 +28,23 @@
         <p id="availableBikeStand"></p>
         <p id="availableBikes"></p>
         <p id="status"></p>
-        <button type="button">Réservez</button>
+        <button id="btn">Réservez</button>
       </div>
     </section>
 
-    <footer>
+    <!--réservation de vélos-->
+    <canvas id="signature" width="200" height="200">
+      Votre navigateur ne supporte pas cette fonctionnalité.
+    </canvas>
 
+    <footer>
+      <div id="validation" data="sessionStorage.validation=this.value"></div>
     </footer>
 
     <script src="ajax.js"></script>
     <script src="main.js"></script>
     <script src="markerclusterer.js"></script>
+    <script src="canvas.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO_u15K0DyqTxo95F7W-D42ZNSUzorIs4&callback=initMap"></script>
 
   </body>

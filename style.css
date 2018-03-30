@@ -2,8 +2,18 @@
        height: 400px;
        width: 60%;
       }
+#detailsStation {
+  width: 40%;
+}
 
 section {
+  width: 100%;
   display: flex;
   justify-content: space-around;
+}
+
+canvas {
+  display: none;
+  border: 2px solid red;
+
 }
