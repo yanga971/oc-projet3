@@ -12,8 +12,24 @@ section {
   justify-content: space-around;
 }
 
+#resa_velo {
+  position:relative;
+
+}
+
 canvas {
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: none;
   border: 2px solid red;
 
+}
+
+#btn_canvas {
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 170px;
+  display: none;
 }

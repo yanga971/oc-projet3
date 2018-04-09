@@ -5,6 +5,8 @@ if(reservation.getContext) {
 
   // Propriétés canvas
   var signature = false;
+  document.getElementById("btn_canvas").disabled = true;
+
   // Propriétés graphiques
   ctx.strokeStyle = "black";
   ctx.lineWidth = 2;
@@ -12,6 +14,8 @@ if(reservation.getContext) {
   reservation.onmousedown = function(e) {
     // Dessin activé
     signature = true;
+    // Désactivation du bouton "validez"
+    document.getElementById("btn_canvas").disabled = false;
     // Repositionnement du début du tracé
     ctx.moveTo(e.offsetX,e.offsetY);
   };
@@ -29,5 +33,4 @@ if(reservation.getContext) {
     ctx.lineTo(x,y);
     ctx.stroke();
     }
-
 }

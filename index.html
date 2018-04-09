@@ -33,18 +33,22 @@
     </section>
 
     <!--réservation de vélos-->
-    <canvas id="signature" width="200" height="200">
-      Votre navigateur ne supporte pas cette fonctionnalité.
-    </canvas>
+    <section id="resa_velo">
+        <canvas id="signature" width="200" height="200">
+          Votre navigateur ne supporte pas cette fonctionnalité.
+        </canvas>
+        <button id="btn_canvas">Validez</button>
+    </section>
 
     <footer>
-      <div id="validation" data="sessionStorage.validation=this.value"></div>
+      <div id="validation"></div>
     </footer>
 
     <script src="ajax.js"></script>
     <script src="main.js"></script>
     <script src="markerclusterer.js"></script>
     <script src="canvas.js"></script>
+    <script src="timer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO_u15K0DyqTxo95F7W-D42ZNSUzorIs4&callback=initMap"></script>
 
   </body>

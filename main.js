@@ -1,6 +1,5 @@
 // CARTE DES STATIONS DE VELOS
 // ET ACTIVATION DU CANVAS POUR LA RESERVATION D'UN VELO
-
 // Initialisation de la carte sur la ville de Lyon
   function initMap() {
     var map = new google.maps.Map(document.getElementById('google_map'), {
@@ -29,6 +28,8 @@
         markers.push("stations");
         // Ajout du marqueur sur la carte
         markerClusterer.addMarker(marker);
+        // Désactivation du bouton "réservez"
+        document.getElementById("btn").disabled = true;
 
         // Ajout d'un événement au click
         marker.addListener("click" , function() {
@@ -39,6 +40,13 @@
           // Adresse de la station
           var addressElt = document.getElementById("address")
           addressElt.textContent = "Adresse : " + station.address;
+          // Etat de la station(ouverte ou fermée)
+          var statusElt = document.getElementById("status")
+          statusElt.textContent = "Etat de la station : " + station.status;
+            // Activation du bouton "réservez" si la station est ouverte
+            if(station.status !== "OPEN") {
+              document.getElementById("btn").disabled = true;
+            }
           // Places disponibles
           var availableBikeStandElt = document.getElementById("availableBikeStand")
           availableBikeStandElt.textContent = "Places disponibles : " + station.available_bike_stands;
@@ -52,44 +60,28 @@
               document.getElementById("btn").removeAttribute("disabled");
               }
             // Apparition de la fenêtre canvas au click
-            document.getElementById("btn").onclick = function() {
+            document.getElementById("btn").addEventListener("click",  function() {
               if (window.getComputedStyle(document.getElementById("signature")).display === "none"){
                 document.getElementById("signature").style.display = "block";
+                document.getElementById("btn_canvas").style.display = "block";
               } else {
                 document.getElementById("signature").style.display = "none";
+                document.getElementById("btn_canvas").style.display = "none";
                 }
-                // Validation de la réservation
-                if(document.getElementById("signature").style.display === "none"){
-                  var validationElt = document.getElementById("validation");
-                  var min = 1, sec = 0;
-                  var tps = min * 60 + sec;
-                  var chrono = setInterval(function() {
-                    // Ne garder que les entiers
-                    min=Math.floor(tps/60);
-                    sec=Math.floor(tps-min*60);
-                    tps--;
-                    // Le décompte s'arrête
-                    if((min == 0) && (sec == 0)) {
-                      clearInterval(chrono);
-                    }
-                    validationElt.textContent = "1 vélo réservé à la station " + station.name +" pour " + min + " MIN " + sec + " S";
-                    document.getElementById("btn").setAttribute("disabled", "disabled");// Désactive le bouton "réservez"
-                  },1000); // millisecondes
-                  if(typeof sessionStorage!='undefined') {
-                    if('validation' in sessionStorage) {
-                      alert("Message récupéré");
-                      document.getElementById('validation').value = sessionStorage.getItem('validationElt');
-                    }
-                  } else {
-                    alert("sessionStorage n'est pas supporté");
-                  }
-                }
-            } // Fin de la fonctionnalité canvas
-          // Etat de la station(ouverte ou fermée)
-          var statusElt = document.getElementById("status")
-          statusElt.textContent = "Etat de la station : " + station.status;
-        })
+              // Désactivation du bouton "réservez" à l'apparition de la fenêtre canvas
+              if (document.getElementById("signature").display = "block"){
+                document.getElementById("btn").setAttribute("disabled", "disabled");
+              }
+            })
+            // Processus de validation de la réservation
+            document.getElementById("btn_canvas").addEventListener("click" , function(){
+              document.getElementById("btn").disabled = true;
+              document.getElementById("signature").style.display = "none";
+              document.getElementById("btn_canvas").style.display = "none";
+            // Déclenchement timer et affichage du nom de la station désirée
+             timer(station.name);// Pas trouvé la solution seul
+            })
+        }) // Fin event au click sur marker
       }) // Fin de forEach
     }); // Fin function(stations)
   }
-  // Détection du support
