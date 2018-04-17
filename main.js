@@ -43,45 +43,45 @@
           // Etat de la station(ouverte ou fermée)
           var statusElt = document.getElementById("status")
           statusElt.textContent = "Etat de la station : " + station.status;
+          // Vélos disponibles
+          var availableBikesElt = document.getElementById("availableBikes")
+          availableBikesElt.textContent = "Vélos disponibles : " + station.available_bikes;
             // Activation du bouton "réservez" si la station est ouverte
-            if(station.status !== "OPEN") {
-              document.getElementById("btn").disabled = true;
+            if(station.status   !== "OPEN") {
+              document.getElementById("btn").setAttribute("disabled", "disabled");
+            // Activation du bouton "réservez" si vélos disponibles
+            } else if (station.available_bikes === 0){
+              document.getElementById("btn").setAttribute("disabled", "disabled");
+            } else {
+              document.getElementById("btn").removeAttribute("disabled");
             }
           // Places disponibles
           var availableBikeStandElt = document.getElementById("availableBikeStand")
           availableBikeStandElt.textContent = "Places disponibles : " + station.available_bike_stands;
-          // Vélos disponibles
-          var availableBikesElt = document.getElementById("availableBikes")
-          availableBikesElt.textContent = "Vélos disponibles : " + station.available_bikes;
-            // Activation du bouton "réservez" si vélos disponibles
-            if(station.available_bikes === 0){
-              document.getElementById("btn").setAttribute("disabled", "disabled");
-            } else {
-              document.getElementById("btn").removeAttribute("disabled");
-              }
-            // Apparition de la fenêtre canvas au click
-            document.getElementById("btn").addEventListener("click",  function() {
-              if (window.getComputedStyle(document.getElementById("signature")).display === "none"){
-                document.getElementById("signature").style.display = "block";
-                document.getElementById("btn_canvas").style.display = "block";
-              } else {
-                document.getElementById("signature").style.display = "none";
-                document.getElementById("btn_canvas").style.display = "none";
-                }
-              // Désactivation du bouton "réservez" à l'apparition de la fenêtre canvas
-              if (document.getElementById("signature").display = "block"){
-                document.getElementById("btn").setAttribute("disabled", "disabled");
-              }
-            })
-            // Processus de validation de la réservation
-            document.getElementById("btn_canvas").addEventListener("click" , function(){
-              document.getElementById("btn").disabled = true;
-              document.getElementById("signature").style.display = "none";
-              document.getElementById("btn_canvas").style.display = "none";
-            // Déclenchement timer et affichage du nom de la station désirée
-             timer(station.name);// Pas trouvé la solution seul
-            })
+
+          // Apparition de la fenêtre canvas au click sur le bouton "réservez"
+          document.getElementById("btn").addEventListener("click",  function() {
+              canvasElt.style.display = "block";
+              confirmElt.style.display = "block";
+              clearElt.style.display = "block";
+              canvas(reservation.e);
+          })
+          // Confirmation de la réservation
+          document.getElementById("confirm").addEventListener("click", function(){
+            canvasElt.style.display = "none";
+            confirmElt.style.display = "none";
+            clearElt.style.display = "none";
+            timer(station.name);
+          })
         }) // Fin event au click sur marker
       }) // Fin de forEach
     }); // Fin function(stations)
   }
+
+
+
+
+
+
+
+  

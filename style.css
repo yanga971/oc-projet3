@@ -11,25 +11,28 @@ section {
   display: flex;
   justify-content: space-around;
 }
-
+/* reservation vélo (canvas,boutons confirmer et effacer)*/
 #resa_velo {
   position:relative;
-
 }
 
-canvas {
+#canvas {
   position:absolute;
   left: 50%;
   transform: translateX(-50%);
-  display: none;
   border: 2px solid red;
-
 }
 
-#btn_canvas {
+#confirm {
   position:absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 170px;
-  display: none;
+  left: 40%;
+  /*transform: translateX(-50%);*/
+  top: 120px;
+}
+
+#clear {
+  position:absolute;
+  left: 55%;
+  /*transform: translateX(-50%);*/
+  top: 120px;
 }

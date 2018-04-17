@@ -1,9 +1,10 @@
-
-  var min, sec, tps, chrono;
-  var timer = function(name){
+// timer
+var min, sec, tps, chrono;
+var timer = function(name,time){
     clearInterval(chrono);
+    storage(reservation.time);
     var timerElt = document.getElementById("validation");
-     min = 1;
+     min = 20;
      sec = 0;
      tps = min * 60 + sec;
     chrono = setInterval(function() {
@@ -17,4 +18,4 @@
         clearInterval(chrono);
       }
     },1000) // millisecondes
-  }
+}
