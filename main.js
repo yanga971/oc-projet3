@@ -61,10 +61,15 @@
 
           // Apparition de la fenêtre canvas au click sur le bouton "réservez"
           document.getElementById("btn").addEventListener("click",  function() {
-              canvasElt.style.display = "block";
-              confirmElt.style.display = "block";
-              clearElt.style.display = "block";
-              canvas(reservation.e);
+            canvasElt.style.display = "block";
+            confirmElt.style.display = "block";
+            clearElt.style.display = "block";
+            canvas(reservation.e);
+            document.getElementById("btn").disabled = true;
+          })
+          // Désactivation sur bouton confirmer du canvas si click sur bouton effacer
+          document.getElementById("clear").addEventListener("click", function(){
+            document.getElementById("confirm").disabled = true;
           })
           // Confirmation de la réservation
           document.getElementById("confirm").addEventListener("click", function(){
@@ -73,15 +78,13 @@
             clearElt.style.display = "none";
             timer(station.name);
           })
+          //Persistance des données lors d'une actualisation de la page web
+           window.addEventListener('unload', function() {
+               var name = sessionStorage.setItem("name", station.name);
+          //   var min = sessionStorage.setItem("min", this.min);
+          //   var sec = sessionStorage.setItem("sec", this.sec);
+          });
         }) // Fin event au click sur marker
       }) // Fin de forEach
     }); // Fin function(stations)
   }
-
-
-
-
-
-
-
-  
