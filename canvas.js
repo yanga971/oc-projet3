@@ -59,4 +59,4 @@ function canvas(e){
       reservation.width = reservation.width
     })
  }
-} // fonction canvas
+} 

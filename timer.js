@@ -1,55 +1,33 @@
 // timer
-var min, sec, chrono;
-var toto = {
-  name,
-  min,
-  sec,
-
+var timer = {
 
   init: function(){
     if (sessionStorage.length > 0){
-      //console.log('vous avez deja une reservation')
-
       this.getItem();
-      //timer(name, time)
-      this.chrono(this.name, this.min, this.sec);
+      this.chrono();
     } else {
       this.display()
     }
   },
   getItem: function() {
-    this.name = sessionStorage.getItem("name")
-    //this.time = sessionStorage.getItem('time')
-    //console.log(this.name);
-    //document.getElementById("validation").textContent = "Vous avez déjà une réservation : " + this.name ;
+    name = sessionStorage.getItem("name")
+    min = sessionStorage.getItem("min");
+    sec = sessionStorage.getItem("sec");
+    save();
   },
-  chrono:function(){
-    // Récupération des données stockées
-    var name = sessionStorage.getItem("name");
-    var min = sessionStorage.getItem("min");
-    var sec = sessionStorage.getItem("sec");
+  chrono: function() {
+    var duration = min + sec;
+    clearInterval(interval)
+    var interval = setInterval(function(){
+        var temp = convert(duration)
+        document.getElementById("validation").textContent = "Vous avez déjà une réservation à la station : " + name  + temp;
 
-    // Décrémente le temps restant
-    var stop = setInterval(function(){
-      document.getElementById("validation").textContent = "Vous avez déjà une réservation : " + name + " pour une durée de " + min + " MIN " + sec + " S" ;
-      sec--;
-      if(sec == 00){
-        min--;
-        sec = 60;
-       }
-
-       //Persistance des données lors d'une actualisation de la page web
-       window.addEventListener('unload', function() {
-         sessionStorage.setItem("min", min);
-         sessionStorage.setItem("sec", sec);
-       });
-
-       if((min == 0) && (sec == 1)){
-          clearInterval(stop);
+        duration--;
+        if(duration < 0){
+          stopDecompte();
           document.getElementById("validation").textContent = "Votre réservation est terminée.";
-       }
-    },1000)
-    console.log( "Vous avez déjà une réservation : " + name + " pour une durée de " + min + " MIN " + sec + " S");
+        }
+    }, 1000)
   },
   display: function() {
     console.log("vous n'avez pas de reservation");
@@ -57,29 +35,42 @@ var toto = {
   }
 }; // fin objet
 
-// timer de 20min si résa vélo
-function timer(name,time){
-    clearInterval(chrono);
-    var timerElt = document.getElementById("validation");
-    var min = 1;
-    var sec = 60;
-    chrono = setInterval(function(){
-        timerElt.textContent = "Un vélo réservé à la station : " + name + " pour une durée de " + min + " MIN " + sec + " S";
-        sec--;
-        if(sec == 00){
-          min--;
-          sec = 60;
-        }
+// Décompte de 20 minutes si confirmation  de la réservation d'un vélo
+var timerElt = document.getElementById("validation");
+var interval;
+var duration = 60 ;
+function decompte(name){
+  clearInterval(interval)
+  interval = setInterval( function(){
+      var temp = convert(duration)
+      timerElt.textContent = "Un vélo réservé à la station : " + name + temp;
+      duration--;
 
-        //Persistance des données lors d'une actualisation de la page web
-        window.addEventListener('unload', function() {
-          sessionStorage.setItem("min", min);
-          sessionStorage.setItem("sec", sec);
-        });
-
-        if((min == 0) && (sec == 1)){
-           clearInterval(chrono);
-           timerElt.textContent = "Votre réservation est terminée.";
-        }
-    },1000)
+      if(duration < 0){
+        stopDecompte();
+      }
+  }, 1000)
 }
+
+function stopDecompte(){
+  clearInterval(interval);
+  sessionStorage.clear();
+  timerElt.textContent = "Votre réservation est terminée."
+  window.removeEventListener("unload",save);
+}
+
+// Convertion de la durée (duration) en minutes et secondes
+function convert(a){
+      sec = a % 60;
+      min = Math.floor(a / 60) % 60;
+
+      return " pour une durée de " + min + " MIN " + sec + " S";
+}
+confirmElt.addEventListener("click", timer);
+
+// Persistance des données lors d'une actualisation de la page web
+function save(){
+      sessionStorage.setItem("min", min);
+      sessionStorage.setItem("sec", sec);
+}
+window.addEventListener("unload", save);

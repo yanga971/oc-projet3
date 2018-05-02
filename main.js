@@ -76,13 +76,12 @@
             canvasElt.style.display = "none";
             confirmElt.style.display = "none";
             clearElt.style.display = "none";
-            timer(station.name);
+            decompte(station.name);
           })
+
           //Persistance des données lors d'une actualisation de la page web
-           window.addEventListener('unload', function() {
-               var name = sessionStorage.setItem("name", station.name);
-          //   var min = sessionStorage.setItem("min", this.min);
-          //   var sec = sessionStorage.setItem("sec", this.sec);
+          window.addEventListener('unload', function() {
+              var name = sessionStorage.setItem("name", station.name);
           });
         }) // Fin event au click sur marker
       }) // Fin de forEach
